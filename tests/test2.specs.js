@@ -1,0 +1,31 @@
+const { test, expect } = require('@playwright/test');
+
+test('First Playwright test', async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+await page.goto('https://bank-of-brothers.vercel.app/login');
+
+await page.locator('#username').fill('admin');
+await page.locator('#password').fill('admin123');
+await page.locator('.btn.btn-block').click();
+
+await page.locator('.otp-row .otp-box').first().fill('1');
+await page.locator('.otp-row .otp-box').nth(1).fill('2');
+await page.locator('.otp-row .otp-box').nth(2).fill('3');
+await page.locator('.otp-row .otp-box').nth(3).fill('4');
+await page.locator('.otp-row .otp-box').nth(4).fill('5');
+await page.locator('.otp-row .otp-box').nth(5).fill('6');
+await page.locator('.otp-row .otp-box').nth(6).fill('7');
+await page.locator('.otp-row .otp-box').nth(7).fill('8');
+
+await page.locator('button.btn').nth(1).click();
+await page.waitForLoadState('networkidle');
+await page.locator('a[data-testid="quick-action-beneficiary"]').click();
+ await page.locator('input[data-testid="ben-name"]').fill('suman');
+ await page.locator('input[data-testid="ben-account"]').fill('suman123');
+ await page.locator('input[data-testid="ben-ifsc"]').fill('1234');
+ await page.locator('[data-testid="ben-nickname"]').fill('nkn');
+ await page.locator('.btn').nth(1).click();
+});
+
